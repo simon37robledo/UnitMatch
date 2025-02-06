@@ -17,7 +17,7 @@
 
 %% Add required and optional paths and subpaths
 
-GithubDir = 'C:\Users\user_name\Documents\GitHub'; % Github directory
+GithubDir = 'C:\Users\MarkS9\Documents\GitHub'; % Github directory
 
 % Required (for using UnitMatch):
 addpath(genpath(fullfile(GithubDir,'spikes'))) % https://github.com/cortex-lab/spikes
@@ -33,13 +33,20 @@ addpath(genpath(fullfile(GithubDir,'UnitMatch'))) % Make sure to have this one f
 %% User input
 
 % This is the path where the results will be saved ('\\path\to\save\UnitMatch'), e.g.:
-UMparam.SaveDir = 'D:\MatchingUnits\Output\UnitMatch'; 
+
+cd(path)
+
+if ~exist(path+"\MatchingUnits\Output\UnitMatch",'dir')  
+    mkdir 'MatchingUnits\Output\UnitMatch'
+end
+
+UMparam.SaveDir = path+"\MatchingUnits\Output\UnitMatch"; 
 
 % This is a cell array with a path to each recording's Kilosort output directory, where there should be a subfolder called 'RawWaveforms'. 
 % N.B. if you want to use the functional score evaluation of UnitMatch, 'KSDir' should also contain the Kilosort output (e.g. spike times etc.)/
 % Takes the form of "{'\\path\to\firstrecording','\\path\to\secondrecording','\\path\to\nthrecording'};", e.g.:  
- UMparam.KSDir = {'D:\MatchingUnits\Data\tmp\Mouse1\AL032\2019-11-21\Probe0\1','D:\MatchingUnits\Data\tmp\Mouse1\AL032\2019-11-22\Probe0\1'};  
-
+%UMparam.KSDir = {'D:\MatchingUnits\Data\tmp\Mouse1\AL032\2019-11-21\Probe0\1','D:\MatchingUnits\Data\tmp\Mouse1\AL032\2019-11-22\Probe0\1'};  
+UMparam.KSDir = {path};
  
 %% Get recording information
 
